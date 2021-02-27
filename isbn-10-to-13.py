@@ -23,7 +23,7 @@ def isbn10to13(s):
   sum = 0
   for i in range(0, len(s)):
     m = 1 + 2 * (i % 2)
-    sum += int(s[i])
+    sum += m * int(s[i])
   sum = (10 - sum % 10) % 10
   return s + str(sum)
 
