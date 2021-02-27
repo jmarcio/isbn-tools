@@ -13,10 +13,9 @@
 import sys
 import re
 
-
-def isbn10to13(s):
-  s = s.replace("-", "")
-  if len(s) != 10 or not re.match("^[0-9]+$", s):
+def isbn10to13(si):
+  s = si.replace("-", "")
+  if not re.match("^[0-9]{9}[0-9X]$", s):
     s = "This isn't an ISBN-10 code"
     return s
   s = "978" + s[:-1]
@@ -25,7 +24,8 @@ def isbn10to13(s):
     m = 1 + 2 * (i % 2)
     sum += m * int(s[i])
   sum = (10 - sum % 10) % 10
-  return s + str(sum)
+  sout = '978-' + si[:-1] + str(sum)
+  return sout
 
 sys.argv.pop(0)
 for arg in sys.argv:
